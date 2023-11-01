@@ -1,5 +1,4 @@
 # Updated code
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -155,7 +154,15 @@ import matplotlib.pyplot as plt
 imgs = [np.array(to_image(i)) for i in images]
 imageio.mimsave('progress.gif', imgs)
 
-plt.plot(g_losses, label='Generator Losses')
-plt.plot(d_losses, label='Discriminator Losses')
+# Extract the first values of the tensors
+g_losses_values = [tensor.item() for tensor in g_losses]
+d_losses_values = [tensor.item() for tensor in d_losses]
+
+
+g_losses_values_array = np.array(g_losses_values)
+d_losses_values_array = np.array(d_losses_values)
+
+plt.plot(g_losses_values_array, label='Generator_Losses')
+plt.plot(d_losses_values_array, label='Discriminator Losses')
 plt.legend()
 plt.savefig('loss.png')
